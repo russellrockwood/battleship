@@ -29,9 +29,11 @@ class Cell
   end
 
   def render
-    # if @ship.sunk?
-    #   return 'X'
-    # end
+    if !self.empty?
+      if self.ship.sunk?
+        return 'X'
+      end
+    end
     if self.empty? && self.fired_upon
       return 'M'
     end

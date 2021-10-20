@@ -74,7 +74,7 @@ describe Cell do
       @cell_1.fire_upon
       @cell_1.fire_upon
       @cell_1.fire_upon
-      expect(@cell_1.ship.sunk?).to eq(true)
+      expect(@cell_1.render).to eq('X')
     end
 
   end
