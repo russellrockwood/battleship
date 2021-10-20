@@ -53,4 +53,30 @@ describe Cell do
     end
   end
 
+  describe '#render' do
+    it 'returns correct string for cell not fired upon' do
+      expect(@cell_1.render).to eq('.')
+    end
+
+    it "returns a miss string" do
+      @cell_1.fire_upon
+      expect(@cell_1.render).to eq('M')
+    end
+
+    it 'returns a hit string' do
+      @cell_1.place_ship(@ship_1)
+      @cell_1.fire_upon
+      expect(@cell_1.render).to eq('H')
+    end
+
+    it 'returns correct string for sunken ship' do
+      @cell_1.place_ship(@ship_1)
+      @cell_1.fire_upon
+      @cell_1.fire_upon
+      @cell_1.fire_upon
+      expect(@cell_1.ship.sunk?).to eq(true)
+    end
+
+  end
+
 end

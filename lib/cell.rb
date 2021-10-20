@@ -18,11 +18,26 @@ class Cell
   end
 
   def fire_upon
-    @ship.health -= 1
+    if !self.empty?
+      @ship.health -= 1
+    end
     @fired_upon = true
   end
 
   def fired_upon?
     @fired_upon
+  end
+
+  def render
+    # if @ship.sunk?
+    #   return 'X'
+    # end
+    if self.empty? && self.fired_upon
+      return 'M'
+    end
+    if !self.empty? && self.fired_upon
+      return 'H'
+    end
+    '.'
   end
 end

@@ -1,13 +1,14 @@
 # Added health to attr_accessor & initialize method
 # Removed health method
 # Altered 'hit' method to decrement from health
+# Removed quotes from return values in sunk? method
 class Ship
   attr_accessor :name, :length, :health
 
   def initialize(name, length)
     @name = name
     @length = length
-    @health = @length 
+    @health = @length
   end
 
   # def health
@@ -16,10 +17,10 @@ class Ship
   # end
 
   def sunk?
-    if health > 0
-      "false"
+    if @health > 0
+      false
     else
-      "true"
+      true
     end
 
   end
