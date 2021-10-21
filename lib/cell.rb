@@ -15,11 +15,7 @@ class Cell
 
   def empty?
     @ship == nil ? true : false
-    # if @ship == nil
-    #   true
-    # else
-    #   false
-    # end
+
   end
 
   def fire_upon
