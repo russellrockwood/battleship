@@ -15,6 +15,11 @@ class Cell
 
   def empty?
     @ship == nil ? true : false
+    # if @ship == nil
+    #   true
+    # else
+    #   false
+    # end
   end
 
   def fire_upon
@@ -27,12 +32,10 @@ class Cell
   def fired_upon?
     @fired_upon
   end
-
+# put optional argument
   def render
-    if !self.empty?
-      if self.ship.sunk?
-        return 'X'
-      end
+    if !self.empty? && self.ship.sunk?
+      return 'X'
     end
     if self.empty? && self.fired_upon
       return 'M'
