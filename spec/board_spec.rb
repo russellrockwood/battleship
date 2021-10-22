@@ -30,6 +30,10 @@ RSpec.describe Board do
 
   it "is a valied placement" do
     expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
-    expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
+    expect(@board.valid_placement?(@cruiser, ["A1", "D2"])).to eq(false)
+    expect(@board.valid_placement?(@cruiser, ["B1", "D3"])).to eq(false)
+    expect(@board.valid_placement?(@cruiser, ["A1", "B1", "C1"])).to eq(true)
+    expect(@board.valid_placement?(@cruiser, ["A1", "B2"])).to eq(false)
+    expect(@board.valid_placement?(@cruiser, ["C1", "C3", "C2"])).to eq(true)
   end
 end

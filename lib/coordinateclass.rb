@@ -1,4 +1,8 @@
-class BoardCoords
+require './lib/ship'
+require './lib/cell'
+require './lib/board'
+
+class CoordinatesClass
 
   attr_accessor :coordinates, :nums, :letters
 
@@ -23,19 +27,34 @@ class BoardCoords
     @letters = @letters.sort
   end
 
-  def valid_letters?
-    # letter_flag = true
-    con_array = letters.each_cons(2).to_a
+  def consecutive_letters
+    con_array = @letters.each_cons(2).to_a
+    flag = true
     con_array.each do |arr|
       if arr[0] != arr[1] -1
-        false #flag = false previously
+        flag = false
       end
     end
-    true
+    flag
   end
 
-  def valid_nums?
+  def consecutive_nums
+    con_array = @nums.each_cons(2).to_a
+    flag = true
+    con_array.each do |arr|
+      if arr[0] != arr[1] -1
+        flag = false
+      end
+    end
+    flag
+  end
 
+  def same_letter
+    @letters.uniq.size == 1
+  end
+
+  def same_num
+    @nums.uniq.size == 1
   end
 
 end
