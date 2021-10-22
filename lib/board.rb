@@ -31,6 +31,8 @@ class Board
     if coordinate_checker.consecutive_nums && coordinate_checker.same_letter || coordinate_checker.consecutive_letters && coordinate_checker.same_num
       return true
     end
+
+    false
   end
     #we need to sort first
     #numbers must be consecutive or letters must be consecutive. BOTH CANNOT be consecutive.
