@@ -5,6 +5,8 @@ require './lib/board'
 RSpec.describe Board do
   before(:each) do
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+
   end
 
 
@@ -24,7 +26,10 @@ RSpec.describe Board do
   it "is a valid coordinate" do
     expect(@board.valid_coordinate?("A1")).to eq(true)
     expect(@board.valid_coordinate?("A22")).to eq(false)
+  end
 
-
+  it "is a valied placement" do
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
   end
 end

@@ -20,4 +20,28 @@ class Board
     @cells[coordinate] == nil ? false : true
   end
 
+  def valid_placement?(ship, coordinates)
+    if ship.length != coordinates.length
+       return false
+    end
+    #we need to sort first
+    #numbers must be consecutive or letters must be consecutive. BOTH CANNOT be consecutive.
+    # split_coordinates = coordinates.map do |coordinate|
+    #    coordinate.chars
+    # end
+    # letters = []
+    # nums = []
+    # split_coordinates.each do |array|
+    #   letters << array[0].ord
+    #   nums << array[1].to_i
+    # end
+    # nums = nums.sort
+    # letters = letters.sort
+
+
+
+  end
+
+
+
 end
