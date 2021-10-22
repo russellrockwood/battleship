@@ -9,7 +9,6 @@ RSpec.describe Board do
     @submarine = Ship.new('Submarine', 2)
   end
 
-
   describe '#initialize' do
     it 'exists' do
         expect(@board).to be_instance_of(Board)
@@ -30,7 +29,7 @@ RSpec.describe Board do
       expect(@board.valid_coordinate?("A22")).to eq(false)
     end
   end
-# Note: if ship length ≠ coordinate array length expect returns false ie first conditional
+
   describe '#valid_placement?' do
     it "is a valid placement" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
