@@ -20,9 +20,22 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+
+
+
     if ship.length != coordinates.length
-       return false
+        false
     end
+
+
+    coordinates_open = coordinates.each do |coordinate|
+      if @cells[coordinate].ship != nil
+        false
+      else
+        true
+      end
+    end
+
 
     coordinate_checker = CoordinatesClass.new(coordinates)
     coordinate_checker.sort_elements
@@ -33,5 +46,11 @@ class Board
     false
   end
 
+  def place(ship, coordinates)
 
+    coordinates.each do |coordinate|
+      cell = @cells[coordinate]
+      cell.place_ship(ship)
+    end
+  end
 end
