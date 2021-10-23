@@ -21,21 +21,19 @@ class Board
 
   def valid_placement?(ship, coordinates)
 
-
-
     if ship.length != coordinates.length
         false
     end
-
-
-    coordinates_open = coordinates.each do |coordinate|
+    coordinates_open = true
+#change method to get proper return value.
+    coordinates.each do |coordinate|
       if @cells[coordinate].ship != nil
-        false
-      else
-        true
+        coordinates_open = false
       end
     end
-
+    if !coordinates_open
+      false
+    end
 
     coordinate_checker = CoordinatesClass.new(coordinates)
     coordinate_checker.sort_elements

@@ -45,5 +45,23 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@submarine, ["A1", "A2", "A4"])).to eq(false)
     end
   end
+    it 'places ship' do
 
+      @board.place(@cruiser, ["A1", "D2", "D3"])
+      ship_name = @board.cells["A1"].ship.name
+
+      @board.place(@submarine, ["C4", "B4"])
+      ship_name_1 = @board.cells["C4"].ship.name
+
+      expect(ship_name).to eq("Cruiser")
+      expect(ship_name_1).to eq("Submarine")
+    end
+
+    it "does not overlap" do
+
+      @board.place(@cruiser, ["A1", "D2", "D3"])
+
+      expect(@board.valid_placement?(@submarine, ["D3", "D4"])).to eq(false)
+
+    end
 end
