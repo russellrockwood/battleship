@@ -54,6 +54,11 @@ describe Cell do
   end
 
   describe '#render' do
+    it 'has a ship' do
+      @cell_1.place_ship(@ship_1)
+      expect(@cell_1.render(true)).to eq('S')
+    end
+
     it 'returns correct string for cell not fired upon' do
       expect(@cell_1.render).to eq('.')
     end

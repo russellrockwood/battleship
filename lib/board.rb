@@ -2,7 +2,6 @@ require './lib/ship'
 require './lib/cell'
 require './lib/coordinateclass'
 
-
 class Board
 
   attr_accessor :cells
