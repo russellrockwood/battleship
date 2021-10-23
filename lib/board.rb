@@ -22,7 +22,7 @@ class Board
   def valid_placement?(ship, coordinates)
 
     if ship.length != coordinates.length
-        false
+      return false
     end
     coordinates_open = true
 #change method to get proper return value.
@@ -32,7 +32,7 @@ class Board
       end
     end
     if !coordinates_open
-      false
+      return false
     end
 
     coordinate_checker = CoordinatesClass.new(coordinates)
@@ -50,5 +50,9 @@ class Board
       cell = @cells[coordinate]
       cell.place_ship(ship)
     end
+  end
+
+  def render
+
   end
 end
