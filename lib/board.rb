@@ -1,5 +1,6 @@
 require './lib/ship'
 require './lib/cell'
+require './lib/coordinateclass'
 
 
 class Board
@@ -53,6 +54,26 @@ class Board
   end
 
   def render
+    top_row = "  1 2 3 4 \n"
 
+    cells_array = @cells.values
+
+    render_array = []
+    values_array.each do |cell|
+      render_array << cell.render
+    end
+
+    i = 0
+    ord = 65
+    @cells.each do |element| #element/item
+      cell = element[key]
+      if i > @cells.length - 4
+        break
+      end
+      print ord.chr + render_array[i] + render_array[i+1] + render_array[i+2] + render_array[i+3] + '\n'
+      i += 4
+      ord += 1
+    end
   end
+
 end
