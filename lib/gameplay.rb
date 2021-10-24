@@ -146,4 +146,8 @@ class Gameplay
     end
   end
 
+  def turn 
+
+  end
+
 end
