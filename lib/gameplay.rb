@@ -81,29 +81,8 @@ class Gameplay
     puts "The Cruiser is three units long and the Submarine is two units long."
     puts @player_board.render
 
-    # puts "Enter the squares for the Cruiser (3 spaces):"
-    # input_coordinates = gets.chomp
-    # input_coordinates = input_coordinates.split(" ")
-    # valid_coordinates = true
-    # input_coordinates.each do |coordinate|
-    #   if !@player_board.valid_coordinate?(coordinate)
-    #       valid_coordinates = false
-    #   end
-    # end
-
-    # valid_placement = @player_board.valid_placement?(cruiser, input_coordinates)
-    #
-    # if valid_coordinates && valid_placement
-    #   @player_board.place("Cruiser", input_coordinates)
-    #   puts "Cruiser has been placed."
-    # else
-    #   puts "Those are invalid coordinates. Please try again:"
-    # end
-# using until loops it could be set up that you are asked the please try again messeage
-# UNTILL a succesfull placement. then move to submarine and go UNTILL
-#succesfull sub placement
     ships_not_placed = true
-    placement_attempts = 2
+    placement_attempts = 3
 
     while ships_not_placed && placement_attempts > 0 do
 
@@ -153,6 +132,7 @@ class Gameplay
         if valid_coordinates && valid_placement
           @player_board.place("Cruiser", submarine_coordinates)
           submarine_not_placed = false
+          ships_not_placed = false
           puts "Submarine has been placed."
         else
           puts "Those are invalid coordinates. Please try again:"
@@ -160,7 +140,9 @@ class Gameplay
         end
 
       end
-
+      if placement_attempts = 0
+        puts "What are you doing here?"
+      end
     end
   end
 
