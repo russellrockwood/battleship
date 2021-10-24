@@ -1,20 +1,6 @@
-require './lib/ship'
-require './lib/cell'
-require './lib/coordinateclass'
-require './lib/board'
 
-board = Board.new
-cruiser = Ship.new("Cruiser", 3)
-submarine = Ship.new('Sub', 2)
+require './lib/gameplay'
 
-board.place(cruiser, ["A1", "A2", "A3"])
-board.place(submarine, ['C1', 'D1'])
+test_game = Gameplay.new
 
-board.cells['A1'].fire_upon
-board.cells['B1'].fire_upon
-board.cells['A2'].fire_upon
-
-board.cells['C1'].fire_upon
-board.cells['D1'].fire_upon
-
-board.render
+test_game.main_menu

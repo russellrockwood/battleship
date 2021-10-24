@@ -53,14 +53,14 @@ class Board
     end
   end
 
-  def render
+  def render(input=false)
     puts "   1 2 3 4 "
 
     cells_array = @cells.values
 
     render_array = []
     cells_array.each do |cell|
-      render_array << cell.render(true)
+      render_array << cell.render(input)
     end
 
     i = 0
