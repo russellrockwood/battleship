@@ -60,7 +60,7 @@ class Board
 
     render_array = []
     cells_array.each do |cell|
-      render_array << cell.render
+      render_array << cell.render(true)
     end
 
     i = 0

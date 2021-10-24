@@ -29,16 +29,21 @@ class Cell
     @fired_upon
   end
 # put optional argument
-  def render
-    if !self.empty? && self.ship.sunk?
-      return 'X'
+  def render(input=false)
+    rendered_char = '.'
+    if input && !@fired_upon && !empty?
+      rendered_char = 'S'
+    elsif @fired_upon && empty? # && !self.ship.sunk?
+        rendered_char = 'M'
+    elsif self.ship != nil
+      if @fired_upon && !empty? && self.ship.sunk?
+        rendered_char = 'X'
+      elsif @fired_upon && !empty? && !self.ship.sunk?
+        rendered_char = 'H'
+      end
+    else
+      rendered_char = '.'
     end
-    if self.empty? && self.fired_upon
-      return 'M'
-    end
-    if !self.empty? && self.fired_upon
-      return 'H'
-    end
-    '.'
+    return rendered_char
   end
 end
