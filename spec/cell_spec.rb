@@ -43,7 +43,7 @@ describe Cell do
     it 'reduces ship health' do
       @cell_1.place_ship(@ship_1)
       @cell_1.fire_upon
-      expect(@cell_1.ship.health).to eq(2)
+      expect(@ship_1.health).to eq(2)
     end
   end
 

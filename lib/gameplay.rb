@@ -1,3 +1,4 @@
+
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
@@ -9,6 +10,8 @@ class Gameplay
 
     @computer_board = Board.new
     @player_board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
 
   end
 
@@ -19,8 +22,8 @@ class Gameplay
     response
     case response
     when 'p'
-      @computer_board.place("Cruiser", comp_place_cruiser)
-      @computer_board.place("submarine", comp_place_sub)
+      @computer_board.place(@cruiser, comp_place_cruiser)
+      @computer_board.place(@submarine, comp_place_sub)
       setup
     when 'q'
       puts "Thanks for stopping by!"
@@ -73,8 +76,6 @@ class Gameplay
   end
 
   def setup
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
 
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
@@ -100,10 +101,10 @@ class Gameplay
           end
         end
 
-        valid_placement = @player_board.valid_placement?(cruiser, cruiser_coordinates)
+        valid_placement = @player_board.valid_placement?(@cruiser, cruiser_coordinates)
 
         if valid_coordinates && valid_placement
-          @player_board.place("Cruiser", cruiser_coordinates)
+          @player_board.place(@cruiser, cruiser_coordinates)
           cruiser_not_placed = false
           puts "Cruiser has been placed."
           puts @player_board.render(true)
@@ -128,10 +129,10 @@ class Gameplay
           end
         end
 
-        valid_placement = @player_board.valid_placement?(submarine, submarine_coordinates)
+        valid_placement = @player_board.valid_placement?(@submarine, submarine_coordinates)
 
         if valid_coordinates && valid_placement
-          @player_board.place("Submarine", submarine_coordinates)
+          @player_board.place(@submarine, submarine_coordinates)
           submarine_not_placed = false
           ships_not_placed = false
           puts "Submarine has been placed."
@@ -162,7 +163,7 @@ class Gameplay
 
 
     valid_shot = @player_board.valid_coordinate?(player_shot)
-
+    # #to be removed
     if valid_shot
       @computer_board.cells[player_shot].fire_upon
     else
