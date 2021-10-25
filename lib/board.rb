@@ -22,11 +22,16 @@ class Board
 
   def valid_placement?(ship, coordinates)
 
+    coordinates.each do |coordinate|
+      if !valid_coordinate?(coordinate)
+        return false
+      end
+    end
+
     if ship.length != coordinates.length
       return false
     end
     coordinates_open = true
-#change method to get proper return value.
     coordinates.each do |coordinate|
       if @cells[coordinate].ship != nil
         coordinates_open = false
@@ -38,7 +43,7 @@ class Board
 
     coordinate_checker = CoordinatesClass.new(coordinates)
     coordinate_checker.sort_elements
-    if coordinate_checker.consecutive_nums && coordinate_checker.same_letter || coordinate_checker.consecutive_letters && coordinate_checker.same_num
+    if (coordinate_checker.consecutive_nums && coordinate_checker.same_letter) || (coordinate_checker.consecutive_letters && coordinate_checker.same_num)
       return true
     end
 

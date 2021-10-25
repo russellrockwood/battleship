@@ -7,5 +7,4 @@ board = Board.new
 # test_game.main_menu
 
 
-test_game.setup
-test_game.turn
+test_game.main_menu

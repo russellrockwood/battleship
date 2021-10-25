@@ -20,7 +20,7 @@ class Cell
 
   def fire_upon
     if !self.empty?
-      @ship.health -= 1
+      self.ship.health -= 1
     end
     @fired_upon = true
   end

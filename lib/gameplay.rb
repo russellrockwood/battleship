@@ -143,27 +143,56 @@ class Gameplay
 
       end
       if placement_attempts == 0
-        puts "What are you doing here?"
+        return puts "What are you doing here?"
+
       end
     end
+    play_game
   end
 
-  def turn
+  def play_game
     puts "=============COMPUTER BOARD============="
-    puts @computer_board.render
+    puts @computer_board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
 
     puts "Enter the coordinate for your shot:"
     player_shot = gets.chomp
-    player_shot
-    valid_shot = @player_board.valid_coordinate?(player_shot)
-    if not valid_shot
-      puts "Please enter a valid coordinate:"
 
+
+
+    valid_shot = @player_board.valid_coordinate?(player_shot)
+
+    if valid_shot
+      @computer_board.cells[player_shot].fire_upon
+    else
+      puts "Please enter a valid coordinate:"
     end
-    while #ship not sunk 
-    end
+
+    computer_shot = @computer_board.cells.keys.sample
+    @player_board.cells[computer_shot].fire_upon
+
+    puts "=============COMPUTER BOARD============="
+    puts @computer_board.render(true)
+    puts "==============PLAYER BOARD=============="
+    puts @player_board.render(true)
+    #we need to check if it is invlaid shot, invalid shot, and if there is a
+    #ship there
+
+    # A single turn consists of:
+    #
+
+    # Displaying the boards
+    # Player choosing a coordinate to fire on
+      #store play shot to board
+
+    # Computer choosing a coordinate to fire on
+      #store computer shot to board
+
+    # Reporting the result of the Player’s shot
+
+    # Reporting the result of the Computer’s shot
+
   end
 
 end
