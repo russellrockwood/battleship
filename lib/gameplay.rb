@@ -6,7 +6,7 @@ require './lib/coordinateclass'
 
 class Gameplay
 
-  def initialize #()
+  def initialize 
 
     @computer_board = Board.new
     @player_board = Board.new
@@ -29,34 +29,37 @@ class Gameplay
       puts "Thanks for stopping by!"
     else
       puts "Invalid input. Try again."
-      main_menu
     end
   end
 
   def comp_place_sub
-    possible_number_combinations = (1..4).each_cons(2).to_a
-    letters = ('A'..'D').each_cons(2).to_a
-    random_letter = Random.new.rand(65..68).chr
-    random_number = Random.new.rand(1..4)
-    random_cons_num_array = possible_number_combinations[Random.new.rand(3)] #array[1]
-    random_sub_placement_across = random_cons_num_array.map do |num|
-      random_letter + num.to_s
-    end
-    random_cons_letters_array = letters[Random.new.rand(3)]
-    random_sub_placement_down = random_cons_letters_array.map do |letter|
-      letter + random_number.to_s
-    end
-    random_sub_placement_down
-    random_sub_placement_across
-    array = []
-    array << random_sub_placement_down
-    array << random_sub_placement_across
-    random_coordinates = array.sample
-    acceptable_coordinates = @computer_board.valid_placement?(@submarine, random_coordinates)
-    if !acceptable_coordinates
-      comp_place_sub #execution context
-    else
-      return random_coordinates
+    acceptable_coordinates = false
+    while !acceptable_coordinates
+      possible_number_combinations = (1..4).each_cons(2).to_a
+      letters = ('A'..'D').each_cons(2).to_a
+      random_letter = Random.new.rand(65..68).chr
+      random_number = Random.new.rand(1..4)
+      random_cons_num_array = possible_number_combinations[Random.new.rand(3)] #array[1]
+      random_sub_placement_across = random_cons_num_array.map do |num|
+        random_letter + num.to_s
+      end
+      random_cons_letters_array = letters[Random.new.rand(3)]
+      random_sub_placement_down = random_cons_letters_array.map do |letter|
+        letter + random_number.to_s
+      end
+      random_sub_placement_down
+      random_sub_placement_across
+      array = []
+      array << random_sub_placement_down
+      array << random_sub_placement_across
+      random_coordinates = array.sample
+      acceptable_coordinates = @computer_board.valid_placement?(@submarine, random_coordinates)
+
+      if !acceptable_coordinates
+        next
+      else
+        return random_coordinates
+      end
     end
 
   end
@@ -159,7 +162,7 @@ class Gameplay
   end
 
   def play_game
-    while @player_board.ships_sunk? && @computer_board.ships_sunk?
+    while !@player_board.ships_sunk? && !@computer_board.ships_sunk? # look at this condition
       remaining_coordinates_comp = @computer_board.cells.keys
       remaining_coordinates_player = @player_board.cells.keys
       puts "=============COMPUTER BOARD============="
