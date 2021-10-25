@@ -106,6 +106,7 @@ class Gameplay
           @player_board.place("Cruiser", cruiser_coordinates)
           cruiser_not_placed = false
           puts "Cruiser has been placed."
+          puts @player_board.render
         else
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
@@ -134,19 +135,20 @@ class Gameplay
           submarine_not_placed = false
           ships_not_placed = false
           puts "Submarine has been placed."
+          puts @player_board.render
         else
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
         end
 
       end
-      if placement_attempts = 0
+      if placement_attempts == 0
         puts "What are you doing here?"
       end
     end
   end
 
-  def turn 
+  def turn
 
   end
 
