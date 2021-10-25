@@ -51,7 +51,14 @@ class Gameplay
     array = []
     array << random_sub_placement_down
     array << random_sub_placement_across
-    array.sample
+    random_coordinates = array.sample
+    acceptable_coordinates = @computer_board.valid_placement?(@submarine, random_coordinates)
+    if !acceptable_coordinates
+      comp_place_sub #execution context
+    else
+      return random_coordinates
+    end
+
   end
 
   def comp_place_cruiser
@@ -170,8 +177,12 @@ class Gameplay
       puts "Please enter a valid coordinate:"
     end
 
+    num = 0
+  while num < 10
+    num += 1
     computer_shot = @computer_board.cells.keys.sample
     @player_board.cells[computer_shot].fire_upon
+  end
 
     puts "=============COMPUTER BOARD============="
     puts @computer_board.render(true)
