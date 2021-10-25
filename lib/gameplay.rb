@@ -159,52 +159,56 @@ class Gameplay
   end
 
   def play_game
-    puts "=============COMPUTER BOARD============="
-    puts @computer_board.render(true)
-    puts "==============PLAYER BOARD=============="
-    puts @player_board.render(true)
+    while @player_board.ships_sunk? && @computer_board.ships_sunk?
+      remaining_coordinates_comp = @computer_board.cells.keys
+      remaining_coordinates_player = @player_board.cells.keys
+      puts "=============COMPUTER BOARD============="
+      puts @computer_board.render(true)
+      puts "==============PLAYER BOARD=============="
+      puts @player_board.render(true)
 
-    puts "Enter the coordinate for your shot:"
-    player_shot = gets.chomp
+      puts "Enter the coordinate for your shot:"
+      player_shot = gets.chomp
 
+      valid_shot = @player_board.valid_coordinate?(player_shot) && remaining_coordinates_player.include?(player_shot)
+      if valid_shot
+        @computer_board.cells[player_shot].fire_upon
+        remaining_coordinates_player.delete(player_shot)
+      else
+        puts "Please enter a valid coordinate:"
+      end
 
+      computer_shot = remaining_coordinates_comp.sample
+      @player_board.cells[computer_shot].fire_upon
+      remaining_coordinates_comp.delete(computer_shot)
 
-    valid_shot = @player_board.valid_coordinate?(player_shot)
-    # #to be removed
-    if valid_shot
-      @computer_board.cells[player_shot].fire_upon
-    else
-      puts "Please enter a valid coordinate:"
+      player_shot_report = ''
+      computer_shot_report = ''
+      if @computer_board.cells[player_shot].render == 'M'
+        player_shot_report = 'miss'
+      elsif @computer_board.cells[player_shot].render == 'H'
+        player_shot_report = 'hit'
+      elsif @computer_board.cells[player_shot].render == 'X'
+        player_shot_report = 'sunk the ship'
+      end
+
+      if @player_board.cells[computer_shot].render == 'M'
+        computer_shot_report = 'miss'
+      elsif @player_board.cells[computer_shot].render == 'H'
+        computer_shot_report = 'hit'
+      elsif @player_board.cells[computer_shot].render == 'X'
+        computer_shot_report = 'sunk the ship'
+      end
+
+      puts "Your shot on #{player_shot} was a #{player_shot_report}."
+      puts "My shot on #{computer_shot} was a #{computer_shot_report}."
     end
-
-    num = 0
-  while num < 10
-    num += 1
-    computer_shot = @computer_board.cells.keys.sample
-    @player_board.cells[computer_shot].fire_upon
-  end
-
-    puts "=============COMPUTER BOARD============="
-    puts @computer_board.render(true)
-    puts "==============PLAYER BOARD=============="
-    puts @player_board.render(true)
-    #we need to check if it is invlaid shot, invalid shot, and if there is a
-    #ship there
-
-    # A single turn consists of:
-    #
-
-    # Displaying the boards
-    # Player choosing a coordinate to fire on
-      #store play shot to board
-
-    # Computer choosing a coordinate to fire on
-      #store computer shot to board
-
-    # Reporting the result of the Player’s shot
-
-    # Reporting the result of the Computer’s shot
-
+    if @player_board.ships_sunk?
+      puts "I won!"
+    elsif @computer_board.ships_sunk?
+      puts "You won!"
+    end
+    main_menu
   end
 
 end

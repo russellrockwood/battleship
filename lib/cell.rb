@@ -36,7 +36,7 @@ class Cell
     elsif @fired_upon && empty? # && !self.ship.sunk?
         rendered_char = 'M'
     elsif self.ship != nil
-      if @fired_upon && !empty? && self.ship.sunk?
+      if @fired_upon && !empty? && self.ship.sunk? 
         rendered_char = 'X'
       elsif @fired_upon && !empty? && !self.ship.sunk?
         rendered_char = 'H'
