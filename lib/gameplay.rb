@@ -79,10 +79,10 @@ class Gameplay
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
-    puts @player_board.render
+    puts @player_board.render(true)
 
     ships_not_placed = true
-    placement_attempts = 3
+    placement_attempts = 4
 
     while ships_not_placed && placement_attempts > 0 do
 
@@ -106,7 +106,7 @@ class Gameplay
           @player_board.place("Cruiser", cruiser_coordinates)
           cruiser_not_placed = false
           puts "Cruiser has been placed."
-          puts @player_board.render
+          puts @player_board.render(true)
         else
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
@@ -131,11 +131,11 @@ class Gameplay
         valid_placement = @player_board.valid_placement?(submarine, submarine_coordinates)
 
         if valid_coordinates && valid_placement
-          @player_board.place("Cruiser", submarine_coordinates)
+          @player_board.place("Submarine", submarine_coordinates)
           submarine_not_placed = false
           ships_not_placed = false
           puts "Submarine has been placed."
-          puts @player_board.render
+          puts @player_board.render(true)
         else
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
@@ -149,7 +149,21 @@ class Gameplay
   end
 
   def turn
+    puts "=============COMPUTER BOARD============="
+    puts @computer_board.render
+    puts "==============PLAYER BOARD=============="
+    puts @player_board.render(true)
 
+    puts "Enter the coordinate for your shot:"
+    player_shot = gets.chomp
+    player_shot
+    valid_shot = @player_board.valid_coordinate?(player_shot)
+    if not valid_shot
+      puts "Please enter a valid coordinate:"
+
+    end
+    while #ship not sunk 
+    end
   end
 
 end

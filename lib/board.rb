@@ -75,4 +75,22 @@ class Board
     end
   end
 
+  def ships_sunk?
+    cells_array = @cells.values
+
+    # floating_ship = true
+    cells_array.each do |cell|
+      if !cell.empty?
+        if !cell.ship.sunk?
+            return false  #floating_ship
+        end
+
+      end
+    end
+    return true
+    #we need to iterate through all cells
+    # and we need to check if each cell contains a ship with health above 0
+    #if at any point we reach a floating ship, retrun false
+  end
+
 end
