@@ -92,7 +92,7 @@ class Board
   end
 
   def ships_sunk?
-    cells_array = @cells.values
+    cells_array = @cells.values#blah blah
 
 
     cells_array.each do |cell|
