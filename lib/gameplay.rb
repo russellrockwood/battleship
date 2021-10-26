@@ -6,29 +6,6 @@ require './lib/coordinateclass'
 
 class Gameplay
 
-  # def initialize
-
-    # @computer_board = Board.new ** moved to start method
-    # @player_board = Board.new  ** moved to start method
-    # @cruiser = Ship.new("Cruiser", 3)
-    # @submarine = Ship.new("Submarine", 2)
-
-  # end
-
-  # def main_menu
-  #   puts "Welcome to BATTLESHIP"
-  #   puts "Enter p to play. Enter q to quit."
-  #   response = gets.chomp
-  #   response
-    # case response
-    # when 'p'
-    #   setup
-    # when 'q'
-    #   puts "Thanks for stopping by!"
-    # else
-    #   puts "Invalid input. Try again."
-    # end
-  # end
   def start
     keep_playing = true
     while keep_playing
@@ -52,14 +29,14 @@ class Gameplay
   end
 
 
-  def random_sub_coordinates # renamed function
+  def random_sub_coordinates
     acceptable_coordinates = false
     while !acceptable_coordinates
       possible_number_combinations = (1..4).each_cons(2).to_a
       letters = ('A'..'D').each_cons(2).to_a
       random_letter = Random.new.rand(65..68).chr
       random_number = Random.new.rand(1..4)
-      random_cons_num_array = possible_number_combinations[Random.new.rand(3)] #array[1]
+      random_cons_num_array = possible_number_combinations[Random.new.rand(3)]
       random_sub_placement_across = random_cons_num_array.map do |num|
         random_letter + num.to_s
       end
@@ -86,7 +63,7 @@ class Gameplay
   end
 
 
-  def random_cruiser_coordinates # renamed function
+  def random_cruiser_coordinates
     possible_number_combinations = (1..4).each_cons(3).to_a
     letters = ('A'..'D').each_cons(3).to_a
     random_letter = Random.new.rand(65..68).chr
@@ -109,16 +86,16 @@ class Gameplay
 
 
   def setup
-    @computer_board = Board.new # boards need to reset every game
+    @computer_board = Board.new
     @player_board = Board.new
 
-    @computer_cruiser = Ship.new("Cruiser", 3) # ships need to reset every game
+    @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
-    @player_cruiser = Ship.new("Cruiser", 3) # player and computer were using same ship caused errors
+    @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
 
-    @computer_board.place(@computer_cruiser, random_cruiser_coordinates) # moved from main_menu
-    @computer_board.place(@computer_submarine, random_sub_coordinates) # moved from main_menu
+    @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
+    @computer_board.place(@computer_submarine, random_sub_coordinates)
 
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
@@ -194,29 +171,27 @@ class Gameplay
       end
 
     end
-    # play_game
   end
 
 
   def play_game
-    remaining_coordinates_comp = @computer_board.cells.keys # moved outside of while loop
-    remaining_coordinates_player = @player_board.cells.keys # moved outside of while loop
+    remaining_coordinates_comp = @computer_board.cells.keys
+    remaining_coordinates_player = @player_board.cells.keys
 
-    while !@player_board.ships_sunk? && !@computer_board.ships_sunk? # while computer and player still have ships
+    while !@player_board.ships_sunk? && !@computer_board.ships_sunk?
       puts "=============COMPUTER BOARD============="
       puts @computer_board.render(true)
       puts "==============PLAYER BOARD=============="
       puts @player_board.render(true)
 
-      player_taking_shot = true # bool variable for while loop
-      player_shot = '' # added because player shot is referenced outside while loop, scope issue: consider using '@'
-      while player_taking_shot # added while loop, prompt user until valid shot is taken
+      player_taking_shot = true
+      player_shot = '' 
+      while player_taking_shot
         puts "Enter the coordinate for your shot:"
         player_shot = gets.chomp
 
         valid_shot = @player_board.valid_coordinate?(player_shot) && remaining_coordinates_player.include?(player_shot)
-        # User is informed when they have already fired on a coordinate
-        # if the coordinate is valid but is not included in players remaining coordinates array, the shot has been taken already
+
         if @computer_board.cells.keys.include?(player_shot) && !remaining_coordinates_player.include?(player_shot)
           puts 'You have already fired on that coordinate.'
         elsif valid_shot
@@ -240,7 +215,7 @@ class Gameplay
       elsif @computer_board.cells[player_shot].render == 'H'
         player_shot_report = 'was a hit'
       elsif @computer_board.cells[player_shot].render == 'X'
-        player_shot_report = "sunk my #{@computer_board.cells[player_shot].ship.name}" # report name of sunk ship
+        player_shot_report = "sunk my #{@computer_board.cells[player_shot].ship.name}"
       end
 
       if @player_board.cells[computer_shot].render == 'M'
@@ -248,12 +223,18 @@ class Gameplay
       elsif @player_board.cells[computer_shot].render == 'H'
         computer_shot_report = 'was a hit'
       elsif @player_board.cells[computer_shot].render == 'X'
-        computer_shot_report = "sunk your #{@player_board.cells[computer_shot].ship.name}" # report name of sunk ship
+        computer_shot_report = "sunk your #{@player_board.cells[computer_shot].ship.name}"
       end
 
       puts "Your shot on #{player_shot} #{player_shot_report}."
       puts "My shot on #{computer_shot} #{computer_shot_report}."
     end
+
+    puts "=============COMPUTER BOARD============="
+    puts @computer_board.render(true)
+    puts "==============PLAYER BOARD=============="
+    puts @player_board.render(true)
+
     if @player_board.ships_sunk?
       puts ''
       puts ''

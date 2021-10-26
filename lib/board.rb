@@ -31,7 +31,7 @@ class Board
     if ship.length != coordinates.length
       return false
     end
-    
+
     coordinates_open = true
     coordinates.each do |coordinate|
       if @cells[coordinate].ship != nil
@@ -71,7 +71,7 @@ class Board
 
     i = 0
     ord = 65
-    @cells.each do |element| #element/item
+    @cells.each do |element|
       if i > @cells.length - 4
         break
       end
@@ -84,11 +84,11 @@ class Board
   def ships_sunk?
     cells_array = @cells.values
 
-    # floating_ship = true
+
     cells_array.each do |cell|
       if !cell.empty?
         if !cell.ship.sunk?
-            return false  #floating_ship
+            return false  
         end
 
       end

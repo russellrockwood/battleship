@@ -1,2 +1,1 @@
-require './lib/gameplay'
-Gameplay.new.start
+require './lib/gameplay'; Gameplay.new.start
