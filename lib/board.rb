@@ -22,11 +22,17 @@ class Board
 
   def valid_placement?(ship, coordinates)
 
+    coordinates.each do |coordinate|
+      if !valid_coordinate?(coordinate)
+        return false
+      end
+    end
+
     if ship.length != coordinates.length
       return false
     end
+
     coordinates_open = true
-#change method to get proper return value.
     coordinates.each do |coordinate|
       if @cells[coordinate].ship != nil
         coordinates_open = false
@@ -38,7 +44,7 @@ class Board
 
     coordinate_checker = CoordinatesClass.new(coordinates)
     coordinate_checker.sort_elements
-    if coordinate_checker.consecutive_nums && coordinate_checker.same_letter || coordinate_checker.consecutive_letters && coordinate_checker.same_num
+    if (coordinate_checker.consecutive_nums && coordinate_checker.same_letter) || (coordinate_checker.consecutive_letters && coordinate_checker.same_num)
       return true
     end
 
@@ -65,7 +71,7 @@ class Board
 
     i = 0
     ord = 65
-    @cells.each do |element| #element/item
+    @cells.each do |element|
       if i > @cells.length - 4
         break
       end
@@ -73,6 +79,21 @@ class Board
       i += 4
       ord += 1
     end
+  end
+
+  def ships_sunk?
+    cells_array = @cells.values
+
+
+    cells_array.each do |cell|
+      if !cell.empty?
+        if !cell.ship.sunk?
+            return false  
+        end
+
+      end
+    end
+    return true
   end
 
 end

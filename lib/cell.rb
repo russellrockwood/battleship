@@ -19,8 +19,8 @@ class Cell
   end
 
   def fire_upon
-    if !self.empty?
-      @ship.health -= 1
+    if !empty?
+      @ship.hit
     end
     @fired_upon = true
   end
@@ -28,7 +28,7 @@ class Cell
   def fired_upon?
     @fired_upon
   end
-# put optional argument
+
   def render(input=false)
     rendered_char = '.'
     if input && !@fired_upon && !empty?
