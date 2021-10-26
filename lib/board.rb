@@ -5,12 +5,17 @@ require './lib/coordinateclass'
 
 class Board
 
-  attr_accessor :cells
+  attr_accessor :cells, :height, :width
   # two optional parameters(height, width) for initialize to indicate board board size
-  def initialize
+  def initialize(height, width)
+    @height = height
+    @width = width
+    letter_array = ('A'..'Z').to_a #
+    keys = (1..26).to_a #
+    letters_hash = keys.zip(letter_array).to_h #
     @cells = {}
-    for letter in ('A'..'D')
-      for num in (1..4)
+    for letter in ('A'..letters_hash[height])#height Z
+      for num in (1..width)
         @cells[letter + num.to_s] = Cell.new(letter + num.to_s)
       end
     end
@@ -60,7 +65,12 @@ class Board
   end
 
   def render(input=false)
-    puts "   1 2 3 4 "
+    x_axis = "   "
+    x_axis_num = 1
+    while x_axis_num <= @width
+      x_axis.concat( " " + x_axis_num.to_s)
+      x_axis_num += 1
+    end
 
     cells_array = @cells.values
 
@@ -68,7 +78,7 @@ class Board
     cells_array.each do |cell|
       render_array << cell.render(input)
     end
-
+#build out render_array so that it keeps adding height until it reaches the height that was inputed.
     i = 0
     ord = 65
     @cells.each do |element|
