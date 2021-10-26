@@ -185,7 +185,7 @@ class Gameplay
       puts @player_board.render(true)
 
       player_taking_shot = true
-      player_shot = '' 
+      player_shot = ''
       while player_taking_shot
         puts "Enter the coordinate for your shot:"
         player_shot = gets.chomp

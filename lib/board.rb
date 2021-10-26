@@ -6,7 +6,7 @@ require './lib/coordinateclass'
 class Board
 
   attr_accessor :cells
-
+  # two optional parameters(height, width) for initialize to indicate board board size
   def initialize
     @cells = {}
     for letter in ('A'..'D')
@@ -88,7 +88,7 @@ class Board
     cells_array.each do |cell|
       if !cell.empty?
         if !cell.ship.sunk?
-            return false  
+            return false
         end
 
       end
