@@ -31,6 +31,7 @@ class Board
     if ship.length != coordinates.length
       return false
     end
+    
     coordinates_open = true
     coordinates.each do |coordinate|
       if @cells[coordinate].ship != nil
@@ -93,9 +94,6 @@ class Board
       end
     end
     return true
-    #we need to iterate through all cells
-    # and we need to check if each cell contains a ship with health above 0
-    #if at any point we reach a floating ship, retrun false
   end
 
 end
