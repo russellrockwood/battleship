@@ -65,7 +65,7 @@ class Board
   end
 
   def render(input=false)
-    x_axis = "  "
+    x_axis = " "
     x_axis_num = 1
     while x_axis_num <= @width
       x_axis.concat( " " + x_axis_num.to_s)
@@ -77,39 +77,20 @@ class Board
 
     render_array = []
     cells_array.each do |cell|
-      render_array << cell.render
+      render_array << cell.render(input)
     end
 
-    render_array = render_array.each_slice(@width).to_a
-
-    render_array.each do |row|
-      row.each
-    end
+    sliced_array = render_array.each_slice(@width).to_a
 
     ord = 65
-    render_array.each do |row|
-      rendered_row = ''
-      row.each do |render_item|
-        rendered_row.concat(render_item.to_s + ' ')
-      end
-      puts ' ' + ord.chr + ' ' + rendered_row
+    sliced_array.each do |row|
+      puts ord.chr + ' ' + row.join(' ')
       ord += 1
     end
-
-    # i = 0
-    # ord = 65
-    # @cells.each do |element|
-    #   if i > @cells.length - 4
-    #     break
-    #   end
-    #   puts ' ' + ord.chr + ' ' + render_array[i] + ' ' + render_array[i+1] + ' ' + render_array[i+2] + ' ' + render_array[i+3]
-    #   i += 4
-    #   ord += 1
-    # end
   end
 
   def ships_sunk?
-    cells_array = @cells.values#blah blah
+    cells_array = @cells.values
 
 
     cells_array.each do |cell|

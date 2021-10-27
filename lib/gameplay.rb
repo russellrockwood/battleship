@@ -81,25 +81,26 @@ class Gameplay
     array = []
     array << random_sub_placement_down
     array << random_sub_placement_across
+    sleep(1)
     array.sample
   end
 
 
   def setup
-    puts "Please pick a height for you board. The options are 1-26."
-    height = gets.chomp
-    while height.to_i > 26 && height.to_i < 1
-      puts "You have not followed the directions. Try again. Choose 1 - 26!"
-      height = gets.chomp
-    end
+    # puts "Please pick a height for you board. The options are 1-26."
+    # height = gets.chomp.to_i
+    # while height.to_i > 26 || height.to_i < 1
+    #   puts "You have not followed the directions. Try again. Choose 1 - 26!"
+    #   height = gets.chomp.to_i
+    # end
+    #
+    # puts "Please pick a width for you board. The options are 1 - your hearts desire."
+    # width = gets.chomp.to_i
+    #
+    # puts "You have chosen a #{height} by #{width} board."
 
-    puts "Please pick a width for you board. The options are 1 - your hearts desire."
-    width = gets.chomp
-
-    puts "You have chosen a #{height} by #{width} board."
-
-    @computer_board = Board.new(height.to_i, width.to_i)
-    @player_board = Board.new(height.to_i, width.to_i)
+    @computer_board = Board.new(6, 6)
+    @player_board = Board.new(6, 6)
 
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
@@ -109,7 +110,7 @@ class Gameplay
     @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
     @computer_board.place(@computer_submarine, random_sub_coordinates)
 
-  
+
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
     puts @player_board.render(true)
