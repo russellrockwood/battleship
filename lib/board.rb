@@ -76,19 +76,35 @@ class Board
 
     render_array = []
     cells_array.each do |cell|
-      render_array << cell.render(input)
+      render_array << cell.render
     end
-#build out render_array so that it keeps adding height until it reaches the height that was inputed.
-    i = 0
+
+    render_array = render_array.each_slice(@width).to_a
+
+    render_array.each do |row|
+      row.each
+    end
+
     ord = 65
-    @cells.each do |element|
-      if i > @cells.length - 4
-        break
+    render_array.each do |row|
+      rendered_row = ''
+      row.each do |render_item|
+        rendered_row.concat(render_item.to_s + ' ')
       end
-      puts ' ' + ord.chr + ' ' + render_array[i] + ' ' + render_array[i+1] + ' ' + render_array[i+2] + ' ' + render_array[i+3]
-      i += 4
+      puts ' ' + ord.chr + ' ' + rendered_row
       ord += 1
     end
+
+    # i = 0
+    # ord = 65
+    # @cells.each do |element|
+    #   if i > @cells.length - 4
+    #     break
+    #   end
+    #   puts ' ' + ord.chr + ' ' + render_array[i] + ' ' + render_array[i+1] + ' ' + render_array[i+2] + ' ' + render_array[i+3]
+    #   i += 4
+    #   ord += 1
+    # end
   end
 
   def ships_sunk?
