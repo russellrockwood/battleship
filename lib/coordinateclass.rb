@@ -10,7 +10,6 @@ class CoordinatesClass
     @coordinates = coordinates
     @letters = []
     @nums = []
-
   end
 
   def sort_elements

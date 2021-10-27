@@ -4,14 +4,14 @@ require './lib/board'
 
 RSpec.describe Board do
   before(:each) do
-    @board = Board.new
+    @board = Board.new(25,25)
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new('Submarine', 2)
   end
 
   describe '#initialize' do
     it 'exists' do
-        expect(@board).to be_instance_of(Board)
+      expect(@board).to be_instance_of(Board)
     end
   end
 
@@ -26,7 +26,7 @@ RSpec.describe Board do
   describe '#valid_coordinate?' do
     it "is a valid coordinate" do
       expect(@board.valid_coordinate?("A1")).to eq(true)
-      expect(@board.valid_coordinate?("A22")).to eq(false)
+      expect(@board.valid_coordinate?("pirate")).to eq(false)
     end
   end
 
