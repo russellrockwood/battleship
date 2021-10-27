@@ -15,7 +15,6 @@ class Cell
 
   def empty?
     @ship == nil ? true : false
-
   end
 
   def fire_upon
@@ -33,7 +32,7 @@ class Cell
     rendered_char = '.'
     if input && !@fired_upon && !empty?
       rendered_char = 'S'
-    elsif @fired_upon && empty? # && !self.ship.sunk?
+    elsif @fired_upon && empty?
         rendered_char = 'M'
     elsif self.ship != nil
       if @fired_upon && !empty? && self.ship.sunk?

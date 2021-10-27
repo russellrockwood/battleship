@@ -23,11 +23,8 @@ class Gameplay
       else
         puts "Invalid input. Try again."
       end
-
     end
-
   end
-
 
   def random_sub_coordinates
     acceptable_coordinates = false
@@ -57,9 +54,7 @@ class Gameplay
       else
         return random_coordinates
       end
-
     end
-
   end
 
 
@@ -85,22 +80,21 @@ class Gameplay
     array.sample
   end
 
-
   def setup
-    # puts "Please pick a height for you board. The options are 1-26."
-    # height = gets.chomp.to_i
-    # while height.to_i > 26 || height.to_i < 1
-    #   puts "You have not followed the directions. Try again. Choose 1 - 26!"
-    #   height = gets.chomp.to_i
-    # end
-    #
-    # puts "Please pick a width for you board. The options are 1 - your hearts desire."
-    # width = gets.chomp.to_i
-    #
-    # puts "You have chosen a #{height} by #{width} board."
+    puts "Please pick a height for you board. The options are 1-26."
+    height = gets.chomp.to_i
+    while height.to_i > 26 || height.to_i < 1
+      puts "You have not followed the directions. Try again. Choose 1 - 26!"
+      height = gets.chomp.to_i
+    end
 
-    @computer_board = Board.new(6, 6)
-    @player_board = Board.new(6, 6)
+    puts "Please pick a width for you board. The options are 1 - your hearts desire."
+    width = gets.chomp.to_i
+
+    puts "You have chosen a #{height} by #{width} board."
+
+    @computer_board = Board.new(height, width)
+    @player_board = Board.new(height, width)
 
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
@@ -109,7 +103,6 @@ class Gameplay
 
     @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
     @computer_board.place(@computer_submarine, random_sub_coordinates)
-
 
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
@@ -124,8 +117,7 @@ class Gameplay
       while cruiser_not_placed && placement_attempts > 0 do
 
         puts "Enter the squares for the Cruiser (3 spaces):"
-        # cruiser_coordinates = gets.chomp
-        cruiser_coordinates = 'A1 A2 A3' # ** automatic placement for testing **
+        cruiser_coordinates = gets.chomp
         cruiser_coordinates = cruiser_coordinates.split(" ")
 
         valid_coordinates = true
@@ -146,15 +138,13 @@ class Gameplay
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
         end
-
       end
 
       submarine_not_placed = true
       while submarine_not_placed && placement_attempts > 0 do
 
         puts "Enter the squares for the Submarine (2 spaces):"
-        # submarine_coordinates = gets.chomp
-        submarine_coordinates = 'C3 C4' # ** automatic placement for testing **
+        submarine_coordinates = gets.chomp
         submarine_coordinates = submarine_coordinates.split(" ")
 
         valid_coordinates = true
@@ -176,13 +166,11 @@ class Gameplay
           puts "Those are invalid coordinates. Please try again:"
           placement_attempts -= 1
         end
-
       end
 
       if placement_attempts == 0
         return puts "What are you doing here?"
       end
-
     end
   end
 
@@ -193,7 +181,7 @@ class Gameplay
 
     while !@player_board.ships_sunk? && !@computer_board.ships_sunk?
       puts "=============COMPUTER BOARD============="
-      puts @computer_board.render(true)
+      puts @computer_board.render
       puts "==============PLAYER BOARD=============="
       puts @player_board.render(true)
 
@@ -248,14 +236,15 @@ class Gameplay
     puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
 
+    puts ''
+    puts ''
     if @player_board.ships_sunk?
-      puts ''
-      puts ''
       puts "I won!"
     elsif @computer_board.ships_sunk?
       puts "You won!"
+
     end
+    puts ''
+    puts ''
   end
-
-
 end

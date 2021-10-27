@@ -6,15 +6,15 @@ require './lib/coordinateclass'
 class Board
 
   attr_accessor :cells, :height, :width
-  # two optional parameters(height, width) for initialize to indicate board board size
+
   def initialize(height, width)
     @height = height
     @width = width
-    letter_array = ('A'..'Z').to_a #
-    keys = (1..26).to_a #
-    letters_hash = keys.zip(letter_array).to_h #
+    letter_array = ('A'..'Z').to_a
+    keys = (1..26).to_a
+    letters_hash = keys.zip(letter_array).to_h
     @cells = {}
-    for letter in ('A'..letters_hash[height])#height Z
+    for letter in ('A'..letters_hash[height])
       for num in (1..width)
         @cells[letter + num.to_s] = Cell.new(letter + num.to_s)
       end
@@ -81,24 +81,22 @@ class Board
     end
 
     sliced_array = render_array.each_slice(@width).to_a
-
+    full_board = ''
     ord = 65
     sliced_array.each do |row|
-      puts ord.chr + ' ' + row.join(' ')
+    full_board.concat(ord.chr + ' ' + row.join(' ') + "\n")
       ord += 1
     end
+    full_board
   end
 
   def ships_sunk?
     cells_array = @cells.values
-
-
     cells_array.each do |cell|
       if !cell.empty?
         if !cell.ship.sunk?
             return false
         end
-
       end
     end
     return true
