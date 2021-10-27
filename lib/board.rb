@@ -65,12 +65,13 @@ class Board
   end
 
   def render(input=false)
-    x_axis = "   "
+    x_axis = "  "
     x_axis_num = 1
     while x_axis_num <= @width
       x_axis.concat( " " + x_axis_num.to_s)
       x_axis_num += 1
     end
+    puts x_axis
 
     cells_array = @cells.values
 
