@@ -24,7 +24,6 @@ class Board
   def valid_coordinate?(coordinate)
     @cells[coordinate] == nil ? false : true
   end
-
   def valid_placement?(ship, coordinates)
 
     coordinates.each do |coordinate|

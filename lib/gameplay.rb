@@ -11,7 +11,7 @@ class Gameplay
     while keep_playing
       puts "Welcome to BATTLESHIP"
       puts "Enter p to play. Enter q to quit."
-      response = gets.chomp
+      response = (gets.chomp).downcase
 
       case response
       when 'p'
@@ -118,7 +118,7 @@ class Gameplay
 
         puts "Enter the squares for the Cruiser (3 spaces):"
         cruiser_coordinates = gets.chomp
-        cruiser_coordinates = cruiser_coordinates.split(" ")
+        cruiser_coordinates = cruiser_coordinates.split(" ") 
 
         valid_coordinates = true
         cruiser_coordinates.each do |coordinate|

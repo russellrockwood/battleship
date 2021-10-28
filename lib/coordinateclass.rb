@@ -5,7 +5,6 @@ require './lib/board'
 class CoordinatesClass
 
   attr_accessor :coordinates, :nums, :letters
-
   def initialize(coordinates)
     @coordinates = coordinates
     @letters = []
@@ -18,8 +17,8 @@ class CoordinatesClass
     end
 
     split_coordinates.each do |array|
-      @letters << array[0].ord
-      @nums << array[1].to_i
+      @letters << array.slice!(0)
+      @nums << array.join.to_i
     end
 
     @nums = @nums.sort
